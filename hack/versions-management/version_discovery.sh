@@ -13,8 +13,11 @@ fi
 python "$SCRIPT_DIR/version_discovery.py" "${ARGS[@]}"
 
 if [ "${DRY_RUN:-false}" != true ]; then
+    BRANCH="version-discovery-$(date '+%Y-%m-%d-%H-%M')"
+    git checkout -b $BRANCH
     git add release-candidates.yaml
     git commit -m "Update release candidates"
-    git push origin HEAD:master
+    git push -u origin $BRANCH
+    gh pr create --title "Update release candidates" --body "Automated PR to update release candidates" --base master
 fi
 
