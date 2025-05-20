@@ -13,8 +13,6 @@ fi
 python "$SCRIPT_DIR/version_discovery.py" "${ARGS[@]}"
 
 if [ "${DRY_RUN:-false}" != true ]; then
-    git remote add origin https://github.com/openshift-assisted/cluster-api-provider-openshift-assisted
-    git remote set-url --push origin https://github.com/openshift-assisted/cluster-api-provider-openshift-assisted
     git add release-candidates.yaml
     git commit -m "Update release candidates"
     git push origin HEAD:master

@@ -32,6 +32,8 @@ if [ -z "$INSTALLATION_TOKEN" ]; then
 fi
 
 export GITHUB_APP_PRIVATE_KEY=$(cat ${GITHUB_APP_PRIVATE_KEY_PATH})
-git config --global url."https://x-access-token:${INSTALLATION_TOKEN}@github.com/".insteadOf "https://github.com/"
+git remote add origin "https://x-access-token:${INSTALLATION_TOKEN}@github.com/openshift-assisted/cluster-api-provider-openshift-assisted.git" 2>/dev/null || true
+git remote set-url origin "https://x-access-token:${INSTALLATION_TOKEN}@github.com/openshift-assisted/cluster-api-provider-openshift-assisted.git" 2>/dev/null || true
 git config --global user.name "CAPI version automation"
 git config --global user.email "capi-openshift-assisted@redhat.com"
+
